@@ -12,7 +12,17 @@ public class ReadFile {
         //inf stands for the input file
         Scanner inf = new Scanner(text);
 
-        System.out.println(inf.toString());
+        int len1=0,len2 = 0;
+
+        while(inf.hasNextLine()){
+            String line = inf.nextLine();
+            for(int x = 0; x < line.length(); x++) {
+              len2++;
+            }
+            len1++;
+        }
+
+        inf = new Scanner(text);
 
         char[][] maze = new char[9][35];
 

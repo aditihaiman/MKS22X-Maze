@@ -58,14 +58,19 @@ public class Maze{
       Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
     */
     public int solve(){
-      //find the location of the S.
-
-      //erase the S
+      int row=0, col=0;
+      for(int x = 0; x < maze.length; x++) { //find the location of the S.
+        for(int y = 0; y < maze[x].length; y++) {
+          if (maze[x][y] == 'S') {
+            row = x;
+            col = y;
+          }
+        }
+      }
+      maze[row][col] = '@';//erase the S
 
       //and start solving at the location of the s.
-      //return solve(???,???);
-
-      return -1;
+      return solve(row, col, 1);
     }
 
     /*
@@ -81,7 +86,7 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
+    private int solve(int row, int col, int steps){ //you can add more parameters since this is private
 
       //automatic animation! You are welcome.
       if(animate){

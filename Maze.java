@@ -24,11 +24,11 @@ public class Maze{
         //COMPLETE CONSTRUCTOR
     }
 
-    public String toString(char[][] maze){
+    public String toString(){
       String output = "";
-      for(int x = 0; x < maze.length; x++) {
-        for(int y = 0; y < maze[x].length; y++) {
-          output+=maze[x][y];
+      for(int x = 0; x < this.maze.length; x++) {
+        for(int y = 0; y < this.maze[x].length; y++) {
+          output+=this.maze[x][y];
         }
         output+="\n";
       }
@@ -68,9 +68,9 @@ public class Maze{
         }
       }
       maze[row][col] = '@';//erase the S
-
+      return 0;
       //and start solving at the location of the s.
-      return solve(row, col, 1);
+      //return solve(row, col, 1);
     }
 
     /*

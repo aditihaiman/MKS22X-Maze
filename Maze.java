@@ -68,9 +68,9 @@ public class Maze{
         }
       }
       maze[row][col] = '@';//erase the S
-      return 0;
+
       //and start solving at the location of the s.
-      //return solve(row, col, 1);
+      return solve(row, col, 1, row, col);
     }
 
     /*
@@ -86,16 +86,37 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col, int steps){ //you can add more parameters since this is private
-
+    private int solve(int row, int col, int steps, int prevX, int prevY){ //you can add more parameters since this is private
       //automatic animation! You are welcome.
+      int[] movesX = {0,0,1,-1}, movesY = {1, -1, 0, 0};
       if(animate){
           clearTerminal();
           System.out.println(this);
           wait(20);
       }
       //COMPLETE SOLVE
+      if(maze[row][col]=='E') {
+        return steps;
+      }
+      for(int x = 0; x < 4; x++) {
+        int newX = row + movesX[x], newY = col + movesY[x];
+        if(maze[newX][newY]==' '){// || maze[newX][newY]=='@') {
+          maze[newX][newY]='@';
+          return solve(newX, newY, steps+1, row, col);
+        }
+        if(x==3) {
+          maze[row][col]='.';
+          return solve(prevX, prevY, steps, row, col);
+        }
+      }
+
       return -1; //so it compiles
     }
+
+    private boolean cantMove(int row, int col) {
+      return (maze[row][col+1]!=' ' && maze[row][col-1]!=' ' && maze[row+1][col]!=' ' && maze[row-1][col]!=' ');
+    }
+
+
 
 }

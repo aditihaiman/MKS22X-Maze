@@ -1,15 +1,17 @@
 public class Driver {
   public static void main(String[] args) {
 
-    try {
+    String filename = "Maze1.txt";
+      try{
+        Maze f;
+        f = new Maze(filename);//true animates the maze.
 
-      Maze test = new Maze("Maze1.txt");
-      System.out.println(test);
-      test.solve();
-      System.out.println(test);
-
-    }
-    catch(Exception e){}
+        f.setAnimate(true);
+        f.solve();
+        System.out.println(f);
+      }catch(Exception e){
+        System.out.println("Invalid filename: "+filename);
+      }
 
 
   }

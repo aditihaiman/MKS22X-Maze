@@ -108,12 +108,12 @@ public class Maze{
           maze[newX][newY]='@';
           return solve(newX, newY, steps+1);
         }
-        maze[row][col]='.';
         // if(x==3) {
         //   maze[row][col]='.';
         //   return solve(prevX, prevY, steps, row, col);
         // }
       }
+      maze[row][col]='.';
       for(int x = 0; x < 4; x++) {
         int newX = row + movesX[x], newY = col + movesY[x];
         if(maze[newX][newY]=='@'){// || maze[newX][newY]=='@') {

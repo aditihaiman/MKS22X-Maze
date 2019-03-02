@@ -112,7 +112,7 @@ public class Maze{
         int newX = row + movesX[x], newY = col + movesY[x];
         if(maze[newX][newY]=='@') {
           //System.out.println("A");
-          return solve(newX, newY, steps); //backtracking step
+          return solve(newX, newY, steps-1); //backtracking step
         }
       }
 

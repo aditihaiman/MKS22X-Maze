@@ -68,9 +68,7 @@ public class Maze{
         }
       }
       maze[row][col] = '@';//erase the S
-
-      //and start solving at the location of the s.
-      return solve(row, col, 1);
+      return solve(row, col, 1);//start solving at the location of the s.
     }
 
     /*
@@ -101,33 +99,24 @@ public class Maze{
       if(maze[row][col]=='E') {
         return steps;
       }
-      for(int x = 0; x < 4; x++) {
+      for(int x = 0; x < 4; x++) { //tests if square in front is empty or "E"
         int newX = row + movesX[x], newY = col + movesY[x];
         if (maze[newX][newY]=='E') return solve(newX, newY, steps);
-        if(maze[newX][newY]==' '){// || maze[newX][newY]=='@') {
-          maze[newX][newY]='@';
+        if(maze[newX][newY]==' ') {
+          maze[newX][newY]='@'; // keep track of where program has been
           return solve(newX, newY, steps+1);
         }
-        // if(x==3) {
-        //   maze[row][col]='.';
-        //   return solve(prevX, prevY, steps, row, col);
-        // }
       }
       maze[row][col]='.';
-      for(int x = 0; x < 4; x++) {
+      for(int x = 0; x < 4; x++) { //tests if square in front is '@' ; if there are no other moves possible
         int newX = row + movesX[x], newY = col + movesY[x];
-        if(maze[newX][newY]=='@'){// || maze[newX][newY]=='@') {
-          //maze[newX][newY]='.';
-          System.out.println("A");
-          return solve(newX, newY, steps);
+        if(maze[newX][newY]=='@') {
+          //System.out.println("A");
+          return solve(newX, newY, steps); //backtracking step
         }
       }
 
-      return -1; //so it compiles
-    }
-
-    private boolean cantMove(int row, int col) {
-      return (maze[row][col+1]!=' ' && maze[row][col-1]!=' ' && maze[row+1][col]!=' ' && maze[row-1][col]!=' ');
+      return -1; //only reaches here if there are no possible solutions
     }
 
 

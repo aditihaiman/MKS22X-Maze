@@ -117,7 +117,7 @@ public class Maze{
       for(int x = 0; x < 4; x++) {
         int newX = row + movesX[x], newY = col + movesY[x];
         if(maze[newX][newY]=='@'){// || maze[newX][newY]=='@') {
-          maze[newX][newY]='.';
+          //maze[newX][newY]='.';
           System.out.println("A");
           return solve(newX, newY, steps);
         }

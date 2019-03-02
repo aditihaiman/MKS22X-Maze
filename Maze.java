@@ -70,7 +70,7 @@ public class Maze{
       maze[row][col] = '@';//erase the S
 
       //and start solving at the location of the s.
-      return solve(row, col, 1, row, col);
+      return solve(row, col, 1);
     }
 
     /*
@@ -86,13 +86,16 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col, int steps, int prevX, int prevY){ //you can add more parameters since this is private
+    private int solve(int row, int col, int steps){ //you can add more parameters since this is private
       //automatic animation! You are welcome.
-      int[] movesX = {0,0,1,-1}, movesY = {1, -1, 0, 0};
+      int[] movesY = {0,0,1,-1}, movesX = {1, -1, 0, 0};
       if(animate){
-          clearTerminal();
-          System.out.println(this);
-          wait(20);
+        clearTerminal();
+        char save = maze[row][col];
+        maze[row][col] = '\u2588';
+        System.out.println(this);
+        maze[row][col] = save;
+        wait(150);
       }
       //COMPLETE SOLVE
       if(maze[row][col]=='E') {
@@ -100,13 +103,23 @@ public class Maze{
       }
       for(int x = 0; x < 4; x++) {
         int newX = row + movesX[x], newY = col + movesY[x];
+        if (maze[newX][newY]=='E') return solve(newX, newY, steps);
         if(maze[newX][newY]==' '){// || maze[newX][newY]=='@') {
           maze[newX][newY]='@';
-          return solve(newX, newY, steps+1, row, col);
+          return solve(newX, newY, steps+1);
         }
-        if(x==3) {
-          maze[row][col]='.';
-          return solve(prevX, prevY, steps, row, col);
+        maze[row][col]='.';
+        // if(x==3) {
+        //   maze[row][col]='.';
+        //   return solve(prevX, prevY, steps, row, col);
+        // }
+      }
+      for(int x = 0; x < 4; x++) {
+        int newX = row + movesX[x], newY = col + movesY[x];
+        if(maze[newX][newY]=='@'){// || maze[newX][newY]=='@') {
+          maze[newX][newY]='.';
+          System.out.println("A");
+          return solve(newX, newY, steps);
         }
       }
 

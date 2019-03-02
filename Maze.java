@@ -93,7 +93,7 @@ public class Maze{
         maze[row][col] = '\u2588';
         System.out.println(this);
         maze[row][col] = save;
-        wait(150);
+        wait(50);
       }
       //COMPLETE SOLVE
       if(maze[row][col]=='E') {
